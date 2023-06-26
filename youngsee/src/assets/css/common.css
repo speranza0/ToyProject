@@ -94,6 +94,10 @@ textarea {
   border-color: #5914d6;
 }
 
+.react-calendar.hide {
+  display: none;
+}
+
 /* 연도선택 select */
 
 .year-select {
