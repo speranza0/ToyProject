@@ -1,0 +1,165 @@
+/* 공통영역 */
+
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@font-face {
+  font-family: "SBAggroB";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SBAggroM";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.container {
+  max-width: 460px;
+  min-width: 360px;
+  margin: auto;
+  padding: 28px;
+}
+
+.container.main-color {
+  background-color: #5914d6;
+}
+/* 메인 폰트적용 */
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+textarea {
+  font-family: "Noto Sans KR", sans-serif;
+}
+/* 서브 폰트적용 */
+
+.font-aggro {
+  font-family: SBAggroB;
+}
+
+/* 컬러 금액 폰트 */
+
+.price-color {
+  font-family: SBAggroB;
+  font-size: 18px;
+  color: #5914d6;
+}
+
+/* 영역 여백 */
+
+.container {
+  max-width: 460px;
+  margin: auto;
+  padding: 28px;
+}
+
+/*버튼*/
+
+/*등록하기 버튼*/
+
+.register-btn {
+  width: 50%;
+  height: 36px;
+  padding: 8px 16px;
+  border: 1px solid #5914d6;
+  font-size: 16px;
+  color: #5914d6;
+}
+
+.register-btn:hover {
+  color: #ffff;
+  background-color: #5914d6;
+  border-color: #5914d6;
+}
+
+/*취소하기 버튼*/
+
+.cancel-btn {
+  width: 50%;
+  height: 36px;
+  margin-left: 8px;
+  padding: 8px 16px;
+  border: 1px solid #b9b9b9;
+  font-size: 16px;
+  color: #b9b9b9;
+}
+
+.cancel-btn:hover {
+  color: #ffff;
+  background-color: #5914d6;
+  border-color: #5914d6;
+}
+
+/* 연도선택 select */
+
+.year-select {
+  width: 144px;
+  height: 36px;
+  padding: 8px 10px;
+  color: #b9b9b9;
+  background-color: #fff;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+  background-image: url(/src/assets/image/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center right 9px;
+}
+
+/* 월선택 select */
+
+.month-select {
+  width: 96px;
+  height: 36px;
+  padding: 8px 10px;
+  color: #b9b9b9;
+  background-color: #fff;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+  background-image: url(/src/assets/image/arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center right 9px;
+}
+
+/* 날짜 선택 input */
+
+.date-input {
+  display: block;
+  color: #4d4d4d;
+  width: 304px;
+  height: 36px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+  background-image: url(/src/assets/image/icon-calendar.svg);
+  background-repeat: no-repeat;
+  background-position: 98% center;
+}
+
+/* 금액 input */
+
+.price-input {
+  display: block;
+  color: #4d4d4d;
+  width: 304px;
+  height: 36px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+}
+
+/* 내용 input */
+
+.contents-input {
+  display: block;
+  color: #4d4d4d;
+  width: 304px;
+  height: 120px;
+  padding: 8px 10px 8px 10px;
+  border: 1px solid #b9b9b9;
+  border-radius: 4px;
+  resize: none;
+}

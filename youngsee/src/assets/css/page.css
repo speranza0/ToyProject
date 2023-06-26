@@ -1,0 +1,221 @@
+/* 로그인 페이지 */
+
+.logo-section .logo {
+  display: block;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background-color: #ffffff;
+}
+
+.logo-section .logo .receipt {
+  width: 68px;
+  height: 68px;
+  margin: 14px;
+}
+
+.title {
+  color: #ffffff;
+  margin-top: 28px;
+  font-size: 32px;
+  line-height: 44px;
+}
+
+.login-section input {
+  display: block;
+}
+
+.login-section input::placeholder {
+  color: #ffffff;
+}
+
+.login-section .id {
+  margin-top: 57px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.login-section .password {
+  margin-top: 41px;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.login-section .line {
+  width: 100%;
+  padding-top: 4px;
+  border-bottom: 2px solid #ffffff;
+}
+
+.login-section .log-btn {
+  width: 100%;
+  height: 44px;
+  color: #ffffff;
+  font-size: 18px;
+  margin-top: 80px;
+  border: 2px solid #ffffff;
+}
+
+.copyright {
+  text-align: center;
+  color: #ffffff;
+  margin-top: 182px;
+}
+
+/* 페이지별 제목 폰트 */
+.page_title {
+  font-family: SBAggroB;
+  font-size: 24px;
+}
+
+.title_color {
+  color: #5914d6;
+}
+
+/* 영수증 목록 폰트 */
+.receipt-list-content .content-num {
+  font-size: 10px;
+  font-weight: bold;
+  color: #b9b9b9;
+}
+.receipt-list-content div:nth-child(2) {
+  padding-bottom: 12px;
+}
+.receipt-list-content .content-comment {
+  font-size: 14px;
+  font-family: SBAggroM;
+}
+.receipt-list-content .content-day {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+/* 영수증 목록 레이아웃 */
+.receipt-list {
+  margin-top: 38px;
+  border: 2px solid #B9B9B9;
+}
+.receipt-list-content {
+  padding: 15px 16px;
+  border-top: none;
+}
+.receipt-list-content:first-of-type {
+  padding: 15px 16px;
+  border-top: none;
+}
+.receipt-list-content {
+  border-top: 1px solid #b9b9b9;
+}
+.receipt-list-content .content-num {
+  padding-bottom: 8px;
+}
+.receipt-list-content div:nth-child(2) {
+  padding-bottom: 12px;
+}
+.receipt-list-content .content-comment {
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+
+.receipt-list-content .content-day {
+  padding-bottom: 1.5px;
+  display: flex;
+}
+
+.receipt-list-content .content-day .content-hour {
+  padding-left: 16px;
+  padding-bottom: 0px;
+}
+
+.receipt-list-content a {
+  display: block;
+  position: relative;
+}
+
+.receipt-list-content .mdi-pencil {
+  color: #5914d6;
+  position: absolute;
+  bottom: 0px;
+  right: 26px;
+}
+
+.receipt-list-content .mdi-close {
+  color: #ff6e6e;
+  position: absolute;
+  bottom: 0px;
+  right: 1px;
+}
+
+.img-section .back-img {
+  display: block;
+  margin: 76px auto 0px ;
+  width: 120px;
+  height: 120px;
+
+}
+
+.img-section .back-text {
+ font-family: SBAggroM; 
+ font-size: 24px;
+ color: #4D4D4D;
+ text-align: center;
+}
+
+
+/* 정산 페이지 폰트 */
+select option {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
+  font-weight: medium;
+  color: #4d4d4d;
+}
+.res-box div:first-child {
+  font-family: SBAggroM;
+  font-size: 18px;
+}
+.res-box div:last-child {
+  font-family: SBAggroM;
+  font-size: 24px;
+  color: #5914d6;
+}
+
+/* 정산페이지 레이아웃 */
+.result-section {
+  margin-top: 38px;
+}
+.select-box {
+  margin-top: 20px;
+}
+
+.res-box {
+  margin-top: 40px;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.res-box div:last-child {
+  margin-top: 16px;
+  padding-bottom: 6.5px;
+}
+
+/* 등록페이지 레이아웃 */
+.regist-section {
+  margin-top: 38px;
+}
+
+.input-box {
+  margin-top: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.input-box textarea {
+  width: 100%;
+}
+
+.btn-box {
+  display: flex;
+  margin-top: 38px;
+}

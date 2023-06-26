@@ -1,0 +1,80 @@
+/* 헤더 영역 */
+
+#header.list-section {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+/*영수증 목록버튼-list-btn*/
+
+.list-btn {
+  width: 45%;
+  height: 36px;
+  text-align: center;
+  padding: 9px 16px;
+  border: 1px solid #b9b9b9;
+  font-size: 16px;
+  color: #b9b9b9;
+}
+
+.list-btn.active {
+  color: #5914d6;
+  border-color: #5914d6;
+}
+
+.list-btn:hover {
+  color: #5914d6;
+  border-color: #5914d6;
+}
+
+/*정산하기 목록버튼-calculate-btn*/
+
+.calculate-btn {
+  width: 45%;
+  height: 36px;
+  text-align: center;
+  padding: 9px 16px;
+  border: 1px solid #b9b9b9;
+  font-size: 16px;
+  color: #b9b9b9;
+  margin-left: 10px;
+}
+
+.calculate-btn.active {
+  color: #5914d6;
+  border-color: #5914d6;
+}
+
+.calculate-btn:hover {
+  color: #5914d6;
+  border-color: #5914d6;
+}
+
+/*작성하기 버튼-write-btn*/
+
+.write-btn {
+  width: 10%;
+  height: 36px;
+  padding: 9px 20px;
+  margin-left: 18px;
+  border: 1px solid #b9b9b9;
+  position: relative;
+}
+
+.write-btn.active {
+  border-color: #5914d6;
+}
+
+.write-btn:hover {
+  border-color: #5914d6;
+}
+
+.write-btn img {
+  width: 21px;
+  position: absolute;
+  right: 7px;
+  top: 7px;
+}
+
+
