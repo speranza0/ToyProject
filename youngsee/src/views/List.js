@@ -2,13 +2,20 @@ import React from "react";
 import ListItem from "./ListItem";
 import logo from "../assets/image/logo.png";
 
-function List({ receiptList }) {
+function List({ receiptList, onRemove }) {
   return (
     <main>
       {receiptList.length !== 0 ? (
         <div className="receipt-list">
           {receiptList.map((receiptItem) => (
-            <ListItem key={receiptItem.id} receiptItem={receiptItem} />
+            <ListItem
+              key={receiptItem.id}
+              id={receiptItem.id}
+              price={receiptItem.price}
+              comment={receiptItem.comment}
+              date={receiptItem.date}
+              onRemove={onRemove}
+            />
           ))}
         </div>
       ) : (

@@ -1,27 +1,32 @@
 import { MdClose, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 
-function ListItem({ receiptItem }) {
+function ListItem({ id, price, comment, date, onRemove }) {
+
+  const onDelete = () => {
+    let deleteId = parseInt(id);
+    onRemove(deleteId);
+  }
+
   return (
     <>
       <div className="receipt-list-content">
-        <div className="content-num">{"#" + receiptItem.id}</div>
-        <div className="price-color">
-          {receiptItem.price.toLocaleString() + "원"}
-        </div>
-        <div className="content-comment">{receiptItem.comment}</div>
+        <div className="content-num">{"#" + id}</div>
+        <div className="price-color">{price.toLocaleString() + "원"}</div>
+        <div className="content-comment">{comment}</div>
         <div className="content-day">
-          <div className="content-date">{receiptItem.date}</div>
+          <div className="content-date">{date}</div>
         </div>
-        <Link to='/change?idx=" + index + "' className="modify">
+        <Link to={`/modify/${id}`} className="modify">
           <MdEdit className="mdi-pencil" />
         </Link>
-        <Link to="/delete" data-idx='" + index + "' className="delete">
+        <a className="remove" onClick={onDelete}>
           <MdClose className="mdi-close" />
-        </Link>
+        </a>
       </div>
     </>
   );
 }
 
 export default ListItem;
+;

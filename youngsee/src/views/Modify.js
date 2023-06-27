@@ -1,19 +1,38 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import moment from "moment/moment";
 import "moment/locale/ko";
 
-function Regist({ type, index, createReceiptList }) {
-  const [value, setDate] = useState(new Date());
-  const selectDate = moment(value).format("YYYY.MM.DD");
+function Modify({ type, findReceiptItem, modifyReceiptItem }) {
+  const [date, setDate] = useState(new Date());
+  const momentDate = moment(date).format("YYYY.MM.DD");
 
   const [showCalendar, setShowCalendar] = useState(false);
-  const handleChange = (selectDate) => {
-    setDate(selectDate);
+  const handleChange = (date) => {
+    setDate(date);
     setShowCalendar(false);
   };
+
+  const { receiptItemId } = useParams();
+  const [itemOne, setItemOne] = useState({});
+
+  useEffect(() => {
+    let id = parseInt(receiptItemId);
+    let item = findReceiptItem(id);
+
+    setItemOne(item);
+  }, []);
+
+  useEffect(() => {
+    if (!itemOne) {
+      return;
+    }
+    setDate(itemOne.date);
+    setComment(itemOne.comment);
+    setPrice(itemOne.price);
+  }, [itemOne]);
 
   const [price, setPrice] = useState();
   const [comment, setComment] = useState();
@@ -28,18 +47,17 @@ function Regist({ type, index, createReceiptList }) {
     setComment(e.target.value);
   };
 
-  const onCreate = (e) => {
+  const onUpdate = (e) => {
     e.preventDefault();
 
-    const addItem = {
-      id: index.current,
-      price: price,
-      comment: comment,
-      date: selectDate,
+    const item = {
+      id: parseInt(receiptItemId),
+      price,
+      comment,
+      date: momentDate,
     };
 
-    createReceiptList(addItem);
-
+    modifyReceiptItem(item);
     navigate("/list");
   };
 
@@ -51,11 +69,18 @@ function Regist({ type, index, createReceiptList }) {
     navigate("/list");
   };
 
+  if (!itemOne) {
+    return;
+  }
+
   return (
     <main className="regist-section">
       <form className="regist-box">
         <div className="page_title">
-          영수증 <span className="title_color">{type}</span>
+          영수증
+          <span className="title_color">
+            {type} #{itemOne.id}
+          </span>
         </div>
         <div className="input-box">
           <div>
@@ -66,13 +91,13 @@ function Regist({ type, index, createReceiptList }) {
               className="date-input"
               autoComplete="off"
               placeholder="날짜 선택"
-              value={selectDate}
+              value={momentDate}
               onFocus={() => setShowCalendar(true)}
               readOnly
             />
             <Calendar
               className={showCalendar ? "" : "hide"}
-              value={value}
+              value={date}
               onChange={handleChange}
             />
           </div>
@@ -82,6 +107,7 @@ function Regist({ type, index, createReceiptList }) {
             className="price-input"
             autoComplete="off"
             placeholder="금액"
+            value={price}
             onChange={onPrice}
           />
           <textarea
@@ -89,13 +115,14 @@ function Regist({ type, index, createReceiptList }) {
             className="contents-input"
             placeholder="사용 내역"
             onChange={onComment}
-          ></textarea>
+            value={comment}
+          />
         </div>
         <div className="btn-box">
           <button
             type="submit"
             className="register-btn font-aggro"
-            onClick={onCreate}
+            onClick={onUpdate}
           >
             {type}하기
           </button>
@@ -113,4 +140,4 @@ function Regist({ type, index, createReceiptList }) {
   );
 }
 
-export default Regist;
+export default Modify;

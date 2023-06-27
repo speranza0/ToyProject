@@ -6,10 +6,8 @@ function Login() {
   return (
     <div className="container main-color">
       <div className="logo-section">
-        <Link to="/">
-          <a className="logo" href="/">
-            <img className="receipt" src={logo} alt="로고 이미지 오류" />
-          </a>
+        <Link to="/" className="logo">
+          <img className="receipt" src={logo} alt="로고 이미지 오류" />
         </Link>
         <p className="title font-aggro">
           영수증 써봐 <br />
@@ -22,7 +20,7 @@ function Login() {
             className="id"
             type="text"
             name="id"
-            autocomplete="off"
+            autoComplete="off"
             placeholder="아이디 입력"
           />
           <div className="line"></div>
