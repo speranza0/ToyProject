@@ -12,7 +12,7 @@ function ListItem({ id, price, comment, date, onRemove }) {
     <>
       <div className="receipt-list-content">
         <div className="content-num">{"#" + id}</div>
-        <div className="price-color">{price.toLocaleString() + "원"}</div>
+        <div className="price-color">{parseInt(price).toLocaleString()}원</div>
         <div className="content-comment">{comment}</div>
         <div className="content-day">
           <div className="content-date">{date}</div>

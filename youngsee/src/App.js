@@ -40,10 +40,23 @@ function App() {
   const navigate = useNavigate();
 
   const onRemove = (receiptItemId) => {
+    if (!window.confirm("삭제하시겠습니까?")) {
+      return;
+    }
     setReceiptList(
       receiptList.filter((receiptItem) => receiptItem.id !== receiptItemId)
     );
     navigate("/list");
+  };
+
+  const calculatefliterList = (year, month) => {
+    let filterDate = `${year}.${month}`;
+
+    const newReceiptList = receiptList.filter((receiptItem) =>
+      receiptItem.date.substring(0, 7).includes(filterDate)
+    );
+
+    return newReceiptList;
   };
 
   return (
@@ -76,7 +89,10 @@ function App() {
             }
           />
         </Route>
-        <Route path="/calculate" element={<Calculate />} />
+        <Route
+          path="/calculate"
+          element={<Calculate calculatefliterList={calculatefliterList} />}
+        />
       </Route>
       <Route path="*" element={<>페이지를 찾을수 없습니다.</>} />
     </Routes>
