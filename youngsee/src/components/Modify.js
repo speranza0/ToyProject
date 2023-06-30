@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import moment from "moment/moment";
 import "moment/locale/ko";
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { ko } from 'date-fns/esm/locale';
+import { useInput } from "../hooks/control";
+import { useAppState } from "../hooks/state";
 
-function Modify({ type, findReceiptItem, modifyReceiptItem }) {
+function Modify() {
+  const {findReceiptItem, modifyReceiptItem} = useAppState();
+
+  const [price, onChangePrice, resetPrice, setPrice] = useInput('');
+  const [comment, onChangeComment, resetComment, setComment] = useInput('');
+
   const [date, setDate] = useState(new Date());
   const momentDate = moment(date).format("YYYY.MM.DD");
-
-  const [showCalendar, setShowCalendar] = useState(false);
-  const handleChange = (date) => {
-    setDate(date);
-    setShowCalendar(false);
-  };
 
   const { receiptItemId } = useParams();
   const [itemOne, setItemOne] = useState({});
@@ -30,26 +32,13 @@ function Modify({ type, findReceiptItem, modifyReceiptItem }) {
       return;
     }
     setDate(itemOne.date);
-    setComment(itemOne.comment);
     setPrice(itemOne.price);
+    setComment(itemOne.comment);
   }, [itemOne]);
-
-  const [price, setPrice] = useState();
-  const [comment, setComment] = useState();
 
   const navigate = useNavigate();
 
-  const onPrice = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const onComment = (e) => {
-    setComment(e.target.value);
-  };
-
-  const onUpdate = (e) => {
-    e.preventDefault();
-
+  const onUpdate = () => {
     const item = {
       id: parseInt(receiptItemId),
       price,
@@ -63,8 +52,8 @@ function Modify({ type, findReceiptItem, modifyReceiptItem }) {
 
   const onCancel = () => {
     setDate();
-    setPrice();
-    setComment();
+    resetPrice();
+    resetComment();
 
     navigate("/list");
   };
@@ -77,29 +66,16 @@ function Modify({ type, findReceiptItem, modifyReceiptItem }) {
     <main className="regist-section">
       <form className="regist-box">
         <div className="page_title">
-          영수증
-          <span className="title_color">
-            {type} #{itemOne.id}
-          </span>
+          영수증 <span className="title_color">수정 #{itemOne.id}</span>
         </div>
         <div className="input-box">
           <div>
-            <input
-              type="text"
-              id="datepicker"
-              name="date"
-              className="date-input"
-              autoComplete="off"
-              placeholder="날짜 선택"
+            <DatePicker
+              locale={ko}
+              dateFormat='yyyy-MM-dd'
+              className='date-input'
               value={momentDate}
-              onFocus={() => setShowCalendar(true)}
-              readOnly
-            />
-            <Calendar
-              className={showCalendar ? "" : "hide"}
-              value={date}
-              onChange={handleChange}
-            />
+              onChange={(date) => setDate(date)}/>
           </div>
           <input
             type="text"
@@ -108,23 +84,23 @@ function Modify({ type, findReceiptItem, modifyReceiptItem }) {
             autoComplete="off"
             placeholder="금액"
             value={price}
-            onChange={onPrice}
+            onChange={onChangePrice}
           />
           <textarea
             name="comment"
             className="contents-input"
             placeholder="사용 내역"
-            onChange={onComment}
+            onChange={onChangeComment}
             value={comment}
           />
         </div>
         <div className="btn-box">
           <button
-            type="submit"
+            type="button"
             className="register-btn font-aggro"
             onClick={onUpdate}
           >
-            {type}하기
+            수정하기
           </button>
           <button
             id="cancel"

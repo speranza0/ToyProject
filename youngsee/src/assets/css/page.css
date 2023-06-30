@@ -206,6 +206,15 @@ select option {
   margin-top: 20px;
 }
 
+.input-box .react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__day--outside-month {
+  cursor: default;
+  visibility: hidden;
+}
+
 .input-box input {
   width: 100%;
   margin-bottom: 16px;

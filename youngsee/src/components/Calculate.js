@@ -1,59 +1,38 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useSelect } from "../hooks/control";
+import { useAppState } from "../hooks/state";
+import moment from "moment/moment";
 
-function Calculate({ calculatefliterList }) {
-  const [year, setYear] = useState();
-  const [month, setMonth] = useState();
-  const [filterList, setFilterList] = useState([]);
+function Calculate() {
+  const { calculatefliterList } = useAppState();
+
+  const [today, setToday] = useState(new Date());
+  
+  // const todayYear = momentToday.substring(0, 4);
+  const todayYear = moment(today).format('YYYY');
+  const todayMonth = moment(today).format('MM');
+  // const todayMonth = momentToday.substring(5, 7);
+
+  const [year, onChangeYear] = useSelect(todayYear);
+  const [month, onChangeMonth] = useSelect(todayMonth);
+
   const [totalPrice, setTotalPrice] = useState();
-  const [totalCount, setTotalCounte] = useState();
+  const [totalCount, setTotalCount] = useState();
   const [dividePrice, setDividePrice] = useState();
 
   useEffect(() => {
     const list = calculatefliterList(year, month);
-
-    setFilterList(list);
+    setTotalPrice(list.sumPrice);
+    setTotalCount(list.sumCount);
+    setDividePrice(list.calPrice);
   }, [year, month]);
-
-  useEffect(() => {
-    sumPrice();
-    sumCount();
-  }, [filterList]);
-
-  useEffect(() => {
-    calPrice();
-  }, [totalPrice]);
-
-  const sumPrice = () => {
-    let result = 0;
-    for (let i = 0; i < filterList.length; i++) {
-      result += parseInt(filterList[i].price);
-    }
-    setTotalPrice(result);
-  };
-
-  const sumCount = () => {
-    let result = filterList.length;
-    setTotalCounte(result);
-  };
-
-  const calPrice = () => {
-    let result = parseInt(totalPrice) / 3;
-    setDividePrice(Math.round(result));
-  };
-
-  const onYear = (e) => {
-    setYear(e.target.value);
-  };
-
-  const onMonth = (e) => {
-    setMonth(e.target.value);
-  };
 
   return (
     <main className="result-section">
       <div className="calculate-box">
         <div className="page_title">
-          <span className="selected">{month}</span>월
+          <span className="selected">{year}년 </span>
+          <span className="selected">{month}월 </span>
           <span className="title_color">정산내역</span>
         </div>
         <div className="select-box">
@@ -61,7 +40,8 @@ function Calculate({ calculatefliterList }) {
             id="year"
             className="year-select"
             name="year"
-            onChange={onYear}
+            value={year}
+            onChange={onChangeYear}
           >
             <option value="">연도 선택</option>
             <option value="2022">2022</option>
@@ -77,7 +57,8 @@ function Calculate({ calculatefliterList }) {
             id="month"
             className="month-select"
             name="month"
-            onChange={onMonth}
+            value={month}
+            onChange={onChangeMonth}
           >
             <option value="">월 선택</option>
             <option value="01">1월</option>
@@ -94,20 +75,25 @@ function Calculate({ calculatefliterList }) {
             <option value="12">12월</option>
           </select>
         </div>
-        <div className="res-box">
-          <div>합계</div>
-          <div className="sum">{parseInt(totalPrice).toLocaleString()} 원</div>
-        </div>
-        <div className="res-box">
-          <div>총 건수</div>
-          <div className="count">{totalCount} 건</div>
-        </div>
-        <div className="res-box">
-          <div>정산금액</div>
-          <div className="calculate-pirce">
-            {parseInt(dividePrice).toLocaleString()} 원
+        {
+          totalPrice !== undefined && totalCount !== undefined && dividePrice !== undefined &&
+          <>
+          <div className="res-box">
+            <div>합계</div>
+            <div className="sum">{parseInt(totalPrice).toLocaleString()} 원</div>
+          </div>  
+          <div className="res-box">
+            <div>총 건수</div>
+            <div className="count">{totalCount} 건</div>
           </div>
-        </div>
+          <div className="res-box">
+            <div>정산금액</div>
+            <div className="calculate-pirce">
+              {parseInt(dividePrice).toLocaleString()} 원
+            </div>
+          </div>
+          </>
+        }
       </div>
     </main>
   );

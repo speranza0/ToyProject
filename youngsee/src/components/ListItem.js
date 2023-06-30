@@ -21,7 +21,7 @@ function ListItem({ id, price, comment, date, onRemove }) {
           <MdEdit className="mdi-pencil" />
         </Link>
         <a className="remove" onClick={onDelete}>
-          <MdClose className="mdi-close" />
+          <MdClose className="mdi-close"/>
         </a>
       </div>
     </>
@@ -29,4 +29,3 @@ function ListItem({ id, price, comment, date, onRemove }) {
 }
 
 export default ListItem;
-;

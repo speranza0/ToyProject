@@ -1,8 +1,11 @@
 import React from "react";
 import ListItem from "./ListItem";
 import logo from "../assets/image/logo.png";
+import { useAppState } from "../hooks/state";
 
-function List({ receiptList, onRemove }) {
+function List() {
+  const { receiptList, onRemove } = useAppState();
+  
   return (
     <main>
       {receiptList.length !== 0 ? (
