@@ -1,43 +1,38 @@
-import React from "react";
-
-import { Route, Routes } from "react-router-dom";
-import Login from "./components/Login";
-import Layout from "./components/Layout";
-import List from "./components/List";
-import Regist from "./components/Regist";
-import Modify from "./components/Modify";
-import Calculate from "./components/Calculate";
-import "./assets/css/page.css";
-import "./assets/css/reset.css";
+import { Global, css } from '@emotion/react';
+import { Route, Routes } from 'react-router';
+import AppLayout from './components/layout/AppLayout';
+import ListPage from './pages/list';
+import { reset } from './library/emotion';
+import EditPage from './pages/edit';
+import CalculatePage from './pages/calculate';
+import AuthPage from './pages/auth';
+import AuthLayout from './components/layout/AuthLayout';
+import AuthGuard from './core/Session/AuthGuard';
+import UserGuard from './core/Session/UserGuard';
 
 function App() {
   return (
-    <Routes>
-      <Route path="" element={<Login />} />
-      <Route path="/" element={<Layout />}>
-        <Route
-          path="/list"
-          element={<List />}
-        />
-        <Route
-          path="/regist"
-          element={<Regist />}
-        />
-        <Route path="/modify">
-          <Route
-            path=":receiptItemId"
-            element={
-              <Modify />
-            }
-          />
+    <>
+      <Global styles={reset} />
+      <Routes>
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route element={<AuthGuard />}>
+            <Route index element={<AuthPage />} />
+          </Route>
         </Route>
-        <Route
-          path="/calculate"
-          element={<Calculate />}
-        />
-      </Route>
-      <Route path="*" element={<>페이지를 찾을수 없습니다.</>} />
-    </Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route element={<UserGuard />}>
+            <Route path="/list" element={<ListPage />} />
+            <Route path="/edit">
+              <Route path=":idx" element={<EditPage />}></Route>
+              <Route index element={<EditPage />}></Route>
+            </Route>
+            <Route path="/calculate" element={<CalculatePage />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<div>404!</div>} />
+      </Routes>
+    </>
   );
 }
 
