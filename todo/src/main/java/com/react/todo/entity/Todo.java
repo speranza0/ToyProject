@@ -30,6 +30,6 @@ public class Todo {
     }
 
     public void changeSuccess(boolean success) {
-        this.success = success;
+        this.success = !success;
     }
 }

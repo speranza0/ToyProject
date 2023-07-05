@@ -37,8 +37,8 @@ public class TodoController {
             @ApiResponse(responseCode = "404", description = "존재하지 않는 할일인 경우", content = @Content(schema = @Schema(hidden = true)))
     })
     @PatchMapping("/{id}")
-    public TodoDto update(@RequestBody @Valid TodoRequest.Update param, @PathVariable("id") Long id) {
-        TodoDto todoDto = todoService.update(param, id);
+    public TodoDto update(@PathVariable("id") Long id) {
+        TodoDto todoDto = todoService.update(id);
         return todoDto;
     }
 
@@ -46,7 +46,7 @@ public class TodoController {
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = TodoDto.class))),
             @ApiResponse(responseCode = "404", description = "입력이 잘못된 경우", content = @Content(schema = @Schema(hidden = true)))
     })
-    @PostMapping("/create")
+    @PostMapping("")
     public TodoDto create(@RequestBody @Valid TodoRequest.Create param) {
         TodoDto todoDto = todoService.create(param);
         return todoDto;

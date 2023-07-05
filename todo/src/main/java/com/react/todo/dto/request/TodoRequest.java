@@ -20,13 +20,4 @@ public class TodoRequest {
         private String content;
 
     }
-
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Getter @Setter
-    public static class Update {
-
-        @Schema(description = "완료여부")
-        private boolean success;
-    }
 }

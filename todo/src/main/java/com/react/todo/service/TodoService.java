@@ -24,9 +24,9 @@ public class TodoService {
     }
 
     @Transactional
-    public TodoDto update(TodoRequest.Update param, Long todoId) {
+    public TodoDto update(Long todoId) {
         Todo todo = todoJpaRepository.findById(todoId).orElseThrow();
-        todo.changeSuccess(!param.isSuccess());
+        todo.changeSuccess(todo.isSuccess());
         return TodoDto.toDto(todo);
     }
 
