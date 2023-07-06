@@ -4,6 +4,7 @@ import com.react.todo.dto.TodoDto;
 import com.react.todo.dto.request.TodoRequest;
 import com.react.todo.entity.Todo;
 import com.react.todo.repository.TodoJpaRepository;
+import com.react.todo.repository.TodoQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
 public class TodoService {
 
     private final TodoJpaRepository todoJpaRepository;
+
+    private final TodoQueryRepository todoQueryRepository;
 
 
     @Transactional
@@ -41,8 +44,8 @@ public class TodoService {
     }
 
     @Transactional
-    public List<TodoDto> findAll() {
-        List<Todo> todoList = todoJpaRepository.findAll();
+    public List<TodoDto> search(TodoRequest.Search param) {
+        List<Todo> todoList = todoQueryRepository.search(param);
         return todoList.stream().map(TodoDto::toDto).collect(Collectors.toList());
     }
 }

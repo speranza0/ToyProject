@@ -20,4 +20,15 @@ public class TodoRequest {
         private String content;
 
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter @Setter
+    public static class Search {
+        @Schema(description = "검색어")
+        private String query;
+
+        @Schema(description = "완료여부")
+        private String condi;
+    }
 }

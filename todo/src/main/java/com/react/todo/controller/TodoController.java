@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -52,12 +53,12 @@ public class TodoController {
         return todoDto;
     }
 
-    @Operation(summary = "할일 전체 조회", description = "전체 할일을 조회합니다", responses = {
+    @Operation(summary = "할일 검색 조회", description = "할일을 검색 조회합니다", responses = {
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(array = @ArraySchema(schema = @Schema(implementation = TodoDto.class))))
     })
     @GetMapping("")
-    public List<TodoDto> findAll() {
-        List<TodoDto> todoList = todoService.findAll();
+    public List<TodoDto> search(@ParameterObject @ModelAttribute @Valid TodoRequest.Search param) {
+        List<TodoDto> todoList = todoService.search(param);
         return todoList;
     }
 }

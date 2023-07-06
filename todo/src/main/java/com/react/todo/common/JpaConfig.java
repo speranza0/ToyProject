@@ -1,6 +1,8 @@
 package com.react.todo.common;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManager;
@@ -11,4 +13,8 @@ public class JpaConfig {
 
     private final EntityManager entityManager;
 
+    @Bean
+    public JPAQueryFactory jpaQueryFactory() {
+        return new JPAQueryFactory((entityManager));
+    }
 }
