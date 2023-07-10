@@ -13,13 +13,15 @@ import dayjs from 'dayjs';
 import * as receiptService from 'src/service/receipt';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import useSessionState from "src/store/sessionState";
+
 const schema = yup.object({
-  day: yup.date().required('날짜를 입력해주세요.'),
+  day: yup.date().required("날짜를 입력해주세요."),
   price: yup
     .number()
-    .required('가격을 입력해주세요.')
-    .typeError('가격은 숫자만 입력해주세요.'),
-  comment: yup.string().required('사용 내역을 입력해주세요.'),
+    .required("가격을 입력해주세요.")
+    .typeError("가격은 숫자만 입력해주세요."),
+  comment: yup.string().required("사용 내역을 입력해주세요."),
 });
 
 function EditPage() {
@@ -33,34 +35,36 @@ function EditPage() {
     enabled: !!params.idx,
   });
 
+  const { admin } = useSessionState();
+
   const navigate = useNavigate();
 
   const { control, handleSubmit, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const formId = 'regist-form';
+  const formId = "regist-form";
 
   const onSubmit = async (data) => {
     let idx = params.idx;
     if (params.idx) {
       await receiptService.update(params.idx, data);
 
-      alert('수정 되었습니다.');
+      alert("수정 되었습니다.");
     } else {
       const result = await receiptService.create(data);
       idx = result.idx;
-      alert('등록 되었습니다.');
+      alert("등록 되었습니다.");
     }
 
     await queryClient.invalidateQueries(receiptService.findOneQueryKey(idx));
     await queryClient.invalidateQueries(receiptService.findAllQueryKey);
 
-    navigate('/list');
+    navigate("/list");
   };
 
   const onCancel = () => {
-    navigate('/list');
+    navigate("/list");
   };
 
   const onError = (error) => {
@@ -82,7 +86,7 @@ function EditPage() {
     <div css={styles.block}>
       <form id={formId} onSubmit={handleSubmit(onSubmit, onError)}>
         <div css={styles.title}>
-          영수증 <span>{params.idx ? '수정' : '등록'}</span>
+          영수증 <span>{params.idx ? "수정" : "등록"}</span>
         </div>
         <div css={styles.form}>
           <div className="form-item">
@@ -96,7 +100,7 @@ function EditPage() {
                   autoComplete="off"
                   placeholder="날짜 선택"
                   {...field}
-                  value={field.value && dayjs(field.value).format('YYYY-MM-DD')}
+                  value={field.value && dayjs(field.value).format("YYYY-MM-DD")}
                 />
               )}
             />
@@ -132,7 +136,7 @@ function EditPage() {
         </div>
         <div css={styles.action}>
           <Button type="primary" htmlType="submit">
-            {params.idx ? '수정' : '등록'}하기
+            {params.idx ? "수정" : "등록"}하기
           </Button>
           <Button htmlType="button">취소</Button>
         </div>

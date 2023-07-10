@@ -13,8 +13,8 @@ import useSessionState from 'src/store/sessionState';
 import { useNavigate } from 'react-router';
 
 const schema = yup.object({
-  id: yup.string().required('아이디를 입력해주세요.'),
-  password: yup.string().required('비밀번호를 입력해주세요.'),
+  id: yup.string().required("아이디를 입력해주세요."),
+  password: yup.string().required("비밀번호를 입력해주세요."),
 });
 
 function AuthPage() {
@@ -26,16 +26,16 @@ function AuthPage() {
     resolver: yupResolver(schema),
   });
 
-  const formId = 'auth-form';
+  const formId = "auth-form";
 
   const onSubmit = async (data) => {
     try {
       const user = await loginService.login({
-        id: data.id,
+        username: data.id,
         password: data.password,
       });
       loginAdmin(user);
-      navigate('/list');
+      navigate("/list");
     } catch (error) {
       const message = error.response.data.message;
       alert(message);

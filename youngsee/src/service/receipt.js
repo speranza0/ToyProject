@@ -14,7 +14,8 @@ export const findOne = async (idx) => {
 };
 
 export const create = async ({ day, price, comment }) => {
-  const result = await instance.post('/receipt', { day, price, comment });
+  const result = await instance.post("/receipt", { day, price, comment });
+  console.log(result);
   return result.data.data;
 };
 
