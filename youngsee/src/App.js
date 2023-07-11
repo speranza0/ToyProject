@@ -10,6 +10,16 @@ import AuthLayout from './components/layout/AuthLayout';
 import AuthGuard from './core/Session/AuthGuard';
 import UserGuard from './core/Session/UserGuard';
 
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import "dayjs/locale/ko";
+
+dayjs.extend(timezone);
+dayjs.locale("ko");
+dayjs.tz.setDefault("Asia/Seoul");
+
+
+
 function App() {
   return (
     <>

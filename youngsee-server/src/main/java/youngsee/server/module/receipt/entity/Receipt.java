@@ -59,12 +59,9 @@ public class Receipt {
     }
 
     /* 비즈니스 로직 */
-    public void update(String comment, int price, LocalDateTime day, LocalDateTime updatedAt, User user) {
+    public void update(String comment, int price, LocalDateTime day) {
         this.comment = comment;
         this.price = price;
         this.day = day;
-        this.updatedAt = updatedAt;
-
-        this.user = user;
     }
 }

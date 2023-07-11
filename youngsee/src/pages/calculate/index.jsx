@@ -35,7 +35,11 @@ function CalculatePage() {
 
   const calculateReceipts = async ({ year, month }) => {
     const { sum, count } = await receiptService.calculate({ year, month });
-    setResult({ sumPrice: sum, sumCount: count, calPrice: sum / 3 });
+    setResult({
+      sumPrice: sum,
+      sumCount: count,
+      calPrice: Math.round(sum / 3),
+    });
   };
 
   useEffect(() => {

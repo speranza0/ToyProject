@@ -27,4 +27,16 @@ public class ReceiptRequest {
         @Schema(description = "영수증 날짜")
         private LocalDateTime day;
     }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Getter @Setter
+    public static class Day {
+
+        @Schema(description = "연도")
+        private String year;
+
+        @Schema(description = "달")
+        private String month;
+    }
 }

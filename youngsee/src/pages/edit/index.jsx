@@ -52,8 +52,11 @@ function EditPage() {
 
       alert("수정 되었습니다.");
     } else {
-      const result = await receiptService.create(data);
-      idx = result.idx;
+      const result = await receiptService.create({
+        ...data,
+        day: dayjs(data.day).add(9, "hour"),
+      });
+      idx = result.id;
       alert("등록 되었습니다.");
     }
 

@@ -17,24 +17,25 @@ function ListPage() {
     queryFn: receiptService.findAll,
   });
 
-  const sortReceipts = useMemo(() => {
-    if (!receipts) return [];
-    const list = [...receipts];
-    return list.sort((a, b) => {
-      if (a.idx > b.idx) return -1;
-      return 0;
-    });
-  }, [receipts]);
+  // const sortReceipts = useMemo(() => {
+  //   if (!receipts) return [];
+  //   const list = [...receipts];
+  //   return list.sort((a, b) => {
+  //     if (a.id > b.id) return -1;
+  //     return 0;
+  //   });
+  // }, [receipts]);
+  // console.log(sortReceipts);
 
   const onRemove = async (idx) => {
-    const result = window.confirm('삭제 하시겠습니까?');
+    const result = window.confirm("삭제 하시겠습니까?");
     if (result) {
       await receiptService.remove(idx);
       await queryClient.invalidateQueries(receiptService.findOneQueryKey(idx));
       await queryClient.invalidateQueries(receiptService.findAllQueryKey);
 
       //removeReceipt(idx);
-      alert('삭제완료됐습니다.');
+      alert("삭제완료됐습니다.");
     }
   };
 
@@ -44,21 +45,21 @@ function ListPage() {
     <div css={styles.block}>
       {receipts.length !== 0 && (
         <div css={styles.receiptList}>
-          {sortReceipts.map((receipt, index) => (
+          {receipts.map((receipt, index) => (
             <div css={styles.receiptItem} key={index}>
-              <div className="receipt-idx">#{receipt.idx}</div>
+              <div className="receipt-idx">#{receipt.id}</div>
               <div className="receipt-price">{receipt.price}</div>
               <div className="receipt-comment">{receipt.comment}</div>
               <div className="receipt-day">
-                {dayjs(receipt.day).format('YYYY.MM.DD')}
+                {dayjs(receipt.day).format("YYYY.MM.DD")}
               </div>
               <div className="receipt-action">
-                <RouteLink className="receipt-edit" to={`/edit/${receipt.idx}`}>
+                <RouteLink className="receipt-edit" to={`/edit/${receipt.id}`}>
                   <MdEdit />
                 </RouteLink>
                 <div
                   className="receipt-remove"
-                  onClick={() => onRemove(receipt.idx)}
+                  onClick={() => onRemove(receipt.id)}
                 >
                   <MdClose />
                 </div>
