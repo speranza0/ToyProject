@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router';
-import useSessionState from 'src/store/sessionState';
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router";
+import useSessionState from "src/store/sessionState";
 
 function UserGuard() {
   const { admin } = useSessionState();
@@ -8,7 +8,7 @@ function UserGuard() {
 
   useEffect(() => {
     if (!admin) {
-      navigate('/auth');
+      navigate("/auth");
     }
   }, [admin]);
 

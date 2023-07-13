@@ -1,9 +1,15 @@
-import { useEffect, useState } from 'react';
-import * as styles from './style';
-import { Controller, useForm } from 'react-hook-form';
-import dayjs from 'dayjs';
+import { useEffect, useState } from "react";
+import * as styles from "./style";
+import {
+  Controller,
+  SubmitHandler,
+  SubmitErrorHandler,
+  useForm,
+} from "react-hook-form";
+import dayjs from "dayjs";
 
-import * as receiptService from 'src/service/receipt';
+import * as receiptService from "src/service/receipt";
+import { CalculateRequest } from "src/service/model/CalculateRequest";
 
 function CalculatePage() {
   const [result, setResult] = useState({
@@ -12,11 +18,11 @@ function CalculatePage() {
     calPrice: 0,
   });
 
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset } = useForm<CalculateRequest>();
 
-  const [displayText, setDisplayText] = useState();
+  const [displayText, setDisplayText] = useState<string>();
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<CalculateRequest> = (data) => {
     if (!data.year || !data.month) {
       return;
     }
@@ -25,15 +31,15 @@ function CalculatePage() {
     calculateReceipts(data);
   };
 
-  const onError = (error) => {
-    const errorKey = Object.keys(error);
+  const onError: SubmitErrorHandler<CalculateRequest> = (error) => {
+    const errorKey = Object.keys(error) as ["year", "month"];
     for (const key of errorKey) {
-      alert(error[key].message);
+      alert(error[key]?.message);
       break;
     }
   };
 
-  const calculateReceipts = async ({ year, month }) => {
+  const calculateReceipts = async ({ year, month }: CalculateRequest) => {
     const { sum, count } = await receiptService.calculate({ year, month });
     setResult({
       sumPrice: sum,
@@ -44,8 +50,8 @@ function CalculatePage() {
 
   useEffect(() => {
     const today = dayjs();
-    const year = today.format('YYYY');
-    const month = today.format('MM');
+    const year = today.format("YYYY");
+    const month = today.format("MM");
     reset({ year, month });
     setDisplayText(`${year}년 ${month}월`);
     calculateReceipts({ year, month });
@@ -117,15 +123,15 @@ function CalculatePage() {
           </div>
           <div className="result">
             <div>합계</div>
-            <div name="sumPrice">{result.sumPrice} 원</div>
+            <div>{result.sumPrice} 원</div>
           </div>
           <div className="result">
             <div>총 건수</div>
-            <div name="sumCount">{result.sumCount} 건</div>
+            <div>{result.sumCount} 건</div>
           </div>
           <div className="result">
             <div>정산금액</div>
-            <div name="calPrice">{result.calPrice} 원</div>
+            <div>{result.calPrice} 원</div>
           </div>
         </div>
       </form>

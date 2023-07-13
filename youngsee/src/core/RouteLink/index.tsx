@@ -1,6 +1,13 @@
-import { NavLink } from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-function RouteLink({ className, to, children }) {
+export interface RouteLinkProps {
+  className: string;
+  to: string;
+  children: React.ReactNode;
+}
+
+function RouteLink({ className, to, children }: RouteLinkProps) {
   return (
     <NavLink
       className={({ isActive }) => {

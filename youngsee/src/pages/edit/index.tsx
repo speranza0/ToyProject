@@ -1,19 +1,25 @@
-import Button from 'src/components/atoms/Button';
-import * as styles from './style';
-import { Controller, useForm } from 'react-hook-form';
+import Button from "src/components/atoms/Button";
+import * as styles from "./style";
+import {
+  Controller,
+  SubmitHandler,
+  SubmitErrorHandler,
+  useForm,
+} from "react-hook-form";
 
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
-import { useNavigate, useParams } from 'react-router';
-import { useEffect } from 'react';
-import dayjs from 'dayjs';
+import { useNavigate, useParams } from "react-router";
+import { useEffect } from "react";
+import dayjs from "dayjs";
 
-import * as receiptService from 'src/service/receipt';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import * as receiptService from "src/service/receipt";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 import useSessionState from "src/store/sessionState";
+import { EditRequest } from "src/service/model/EditRequest";
 
 const schema = yup.object({
   day: yup.date().required("날짜를 입력해주세요."),
@@ -39,16 +45,19 @@ function EditPage() {
 
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm<EditRequest>({
     resolver: yupResolver(schema),
   });
 
   const formId = "regist-form";
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<EditRequest> = async (data) => {
     let idx = params.idx;
     if (params.idx) {
-      await receiptService.update(params.idx, data);
+      await receiptService.update(params.idx, {
+        ...data,
+        day: dayjs(data.day).add(9, "hour"),
+      });
 
       alert("수정 되었습니다.");
     } else {
@@ -70,10 +79,10 @@ function EditPage() {
     navigate("/list");
   };
 
-  const onError = (error) => {
-    const errorKey = Object.keys(error);
+  const onError: SubmitErrorHandler<EditRequest> = (error) => {
+    const errorKey = Object.keys(error) as ["day", "price", "comment"];
     for (const key of errorKey) {
-      alert(error[key].message);
+      alert(error[key]?.message);
       break;
     }
   };
@@ -138,10 +147,10 @@ function EditPage() {
           </div>
         </div>
         <div css={styles.action}>
-          <Button type="primary" htmlType="submit">
-            {params.idx ? "수정" : "등록"}하기
+          <Button type="submit">{params.idx ? "수정" : "등록"}하기</Button>
+          <Button type="button" onClick={onCancel}>
+            취소
           </Button>
-          <Button htmlType="button">취소</Button>
         </div>
       </form>
     </div>

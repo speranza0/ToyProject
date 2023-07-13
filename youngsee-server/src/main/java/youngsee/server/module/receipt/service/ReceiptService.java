@@ -70,7 +70,6 @@ public class ReceiptService {
     public ReceiptDto create(ReceiptRequest.Create param, Long userId) {
         User user = userJpaRepository.findById(userId).orElseThrow();
 
-        System.out.println(param.getDay());
         Receipt receipt = new Receipt(param.getComment(), param.getPrice(), param.getDay(), user);
 
         receiptJpaRepository.save(receipt);

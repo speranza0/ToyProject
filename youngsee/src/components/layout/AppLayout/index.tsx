@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom';
-import * as styles from './style';
+import { Outlet } from "react-router-dom";
+import * as styles from "./style";
 
-import IconWrite from 'src/assets/images/icon-write.png';
-import RouteLink from 'src/core/RouteLink';
+import IconWrite from "src/assets/images/icon-write.png";
+import RouteLink from "src/core/RouteLink";
 
 function AppLayout() {
   return (

@@ -1,16 +1,22 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 
-import * as yup from 'yup';
+import * as yup from "yup";
 
-import ImageLogo from 'src/assets/images/image-logo.png';
+import ImageLogo from "src/assets/images/image-logo.png";
 
-import * as styles from './style';
-import Button from 'src/components/atoms/Button';
-import { Controller, useForm } from 'react-hook-form';
+import * as styles from "./style";
+import Button from "src/components/atoms/Button";
+import {
+  Controller,
+  SubmitHandler,
+  SubmitErrorHandler,
+  useForm,
+} from "react-hook-form";
 
-import * as loginService from 'src/service/login';
-import useSessionState from 'src/store/sessionState';
-import { useNavigate } from 'react-router';
+import * as loginService from "src/service/login";
+import useSessionState from "src/store/sessionState";
+import { useNavigate } from "react-router";
+import { AuthRequest } from "src/service/model/AuthRequest";
 
 const schema = yup.object({
   id: yup.string().required("아이디를 입력해주세요."),
@@ -22,13 +28,13 @@ function AuthPage() {
 
   const navigate = useNavigate();
 
-  const { control, handleSubmit, reset } = useForm({
+  const { control, handleSubmit, reset } = useForm<AuthRequest>({
     resolver: yupResolver(schema),
   });
 
   const formId = "auth-form";
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<AuthRequest> = async (data) => {
     try {
       const user = await loginService.login({
         username: data.id,
@@ -36,16 +42,16 @@ function AuthPage() {
       });
       loginAdmin(user);
       navigate("/list");
-    } catch (error) {
+    } catch (error: any) {
       const message = error.response.data.message;
       alert(message);
     }
   };
 
-  const onError = (error) => {
-    const errorKey = Object.keys(error);
+  const onError: SubmitErrorHandler<AuthRequest> = (error) => {
+    const errorKey = Object.keys(error) as ["id", "password"];
     for (const key of errorKey) {
-      alert(error[key].message);
+      alert(error[key]?.message);
       break;
     }
   };
@@ -88,7 +94,7 @@ function AuthPage() {
             />
           </div>
           <div className="form-item form-action">
-            <Button htmlType="submit">로그인</Button>
+            <Button type="submit">로그인</Button>
           </div>
         </form>
       </div>

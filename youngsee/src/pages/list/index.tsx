@@ -1,13 +1,13 @@
-import * as styles from './style';
-import RouteLink from 'src/core/RouteLink';
-import dayjs from 'dayjs';
+import * as styles from "./style";
+import RouteLink from "src/core/RouteLink";
+import dayjs from "dayjs";
 
-import { MdEdit, MdClose } from 'react-icons/md';
-import { useMemo } from 'react';
+import { MdEdit, MdClose } from "react-icons/md";
+import { useMemo } from "react";
 
-import ImageLogo from 'src/assets/images/image-logo.png';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import * as receiptService from 'src/service/receipt';
+import ImageLogo from "src/assets/images/image-logo.png";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import * as receiptService from "src/service/receipt";
 
 function ListPage() {
   const queryClient = useQueryClient();
@@ -27,7 +27,7 @@ function ListPage() {
   // }, [receipts]);
   // console.log(sortReceipts);
 
-  const onRemove = async (idx) => {
+  const onRemove = async (idx: number) => {
     const result = window.confirm("삭제 하시겠습니까?");
     if (result) {
       await receiptService.remove(idx);
