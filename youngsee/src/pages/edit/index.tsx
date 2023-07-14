@@ -56,14 +56,14 @@ function EditPage() {
     if (params.idx) {
       await receiptService.update(params.idx, {
         ...data,
-        day: dayjs(data.day).add(9, "hour"),
+        day: dayjs(data.day).add(9, "hour").toDate(),
       });
 
       alert("수정 되었습니다.");
     } else {
       const result = await receiptService.create({
         ...data,
-        day: dayjs(data.day).add(9, "hour"),
+        day: dayjs(data.day).add(9, "hour").toDate(),
       });
       idx = result.id;
       alert("등록 되었습니다.");

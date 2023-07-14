@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import youngsee.server.common.AuthUser;
 import youngsee.server.module.user.dto.UserDto;
 import youngsee.server.module.user.dto.request.UserRequest;
 import youngsee.server.module.user.service.UserService;
@@ -22,6 +23,14 @@ import javax.validation.Valid;
 public class UserController {
 
     private final UserService userService;
+
+    @Operation(summary = "사용자 세션 취득", description = "사용제 세션 정보를 리턴합니다.", responses = {
+            @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = UserDto.class))),
+    })
+    @GetMapping("/session")
+    public UserDto session(@AuthUser UserDto userDto) {
+        return userDto;
+    }
 
     @Operation(summary = "유저 로그인", description = "유저 로그인합니다", responses = {
             @ApiResponse(responseCode = "200", description = "성공", content = @Content(schema = @Schema(implementation = UserDto.class))),

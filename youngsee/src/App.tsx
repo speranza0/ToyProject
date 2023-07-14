@@ -13,14 +13,26 @@ import UserGuard from './core/Session/UserGuard';
 import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import "dayjs/locale/ko";
+import { useEffect } from "react";
+import * as loginService from "./service/login";
+import useSessionState from "./store/sessionState";
 
 dayjs.extend(timezone);
 dayjs.locale("ko");
 dayjs.tz.setDefault("Asia/Seoul");
 
-
-
 function App() {
+  const { loginAdmin } = useSessionState();
+
+  const getSession = async () => {
+    const session = await loginService.session();
+    loginAdmin(session);
+  };
+
+  useEffect(() => {
+    getSession();
+  }, []);
+
   return (
     <>
       <Global styles={reset} />
@@ -30,8 +42,8 @@ function App() {
             <Route index element={<AuthPage />} />
           </Route>
         </Route>
-        <Route path="/" element={<AppLayout />}>
-          <Route element={<UserGuard />}>
+        <Route path="/" element={<UserGuard />}>
+          <Route element={<AppLayout />}>
             <Route path="/list" element={<ListPage />} />
             <Route path="/edit">
               <Route path=":idx" element={<EditPage />}></Route>
