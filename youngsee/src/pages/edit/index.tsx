@@ -147,8 +147,10 @@ function EditPage() {
           </div>
         </div>
         <div css={styles.action}>
-          <Button type="submit">{params.idx ? "수정" : "등록"}하기</Button>
-          <Button type="button" onClick={onCancel}>
+          <Button type="primary" htmlType="submit">
+            {params.idx ? "수정" : "등록"}하기
+          </Button>
+          <Button htmlType="button" onClick={onCancel}>
             취소
           </Button>
         </div>

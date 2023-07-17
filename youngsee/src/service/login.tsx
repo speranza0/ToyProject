@@ -7,7 +7,6 @@ export interface LoginProps {
 
 export const session = async () => {
   const result = await instance.get("/user/session");
-  console.log(result.data);
   return result.data;
 };
 
