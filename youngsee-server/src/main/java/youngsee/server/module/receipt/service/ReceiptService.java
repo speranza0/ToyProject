@@ -40,7 +40,7 @@ public class ReceiptService {
     @Transactional
     public void delete(Long receiptId, Long userId) {
         Receipt receipt = receiptJpaRepository.findById(receiptId).orElseThrow();
-        if(receipt.getUser().getId() != userId) {
+        if(!receipt.getUser().getId().equals(userId)) {
             throw new RuntimeException("권한이 없습니다.");
         }
         receiptJpaRepository.delete(receipt);
@@ -51,7 +51,7 @@ public class ReceiptService {
     public ReceiptDto update(ReceiptRequest.Create param, Long receiptId, Long userId) {
         Receipt receipt = receiptJpaRepository.findById(receiptId).orElseThrow();
 
-        if(receipt.getUser().getId() != userId) {
+        if(!receipt.getUser().getId().equals(userId)) {
             throw new RuntimeException("권한이 없습니다.");
         }
         System.out.println(param.getDay());
