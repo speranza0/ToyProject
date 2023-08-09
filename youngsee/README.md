@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Youngsee-React-Frontend
+영수증 관리 시스템(Youngsee) + React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🖥️ 프로젝트 소개
+영수증을 등록 수정 삭제(CRUD) 관리 할 수 있는 프론트엔드입니다.
 
-## Available Scripts
+## 🕰️ 개발 기간
+23.06.26일 - 23.07.17일
 
-In the project directory, you can run:
+### ⚙️ 개발 환경
+- `Javascript`, `Typescript`
+- **IDE** : IntelliJ
+- **Framework** : React(2.x)
+- **Database** : MariaDB
 
-### `npm start`
+## 📌 주요 기능
+#### 로그인
+- 로그인 시 아이디, 비밀번호 입력 체크
+- 로그인 시 세션(Session) 호출
+#### 영수증 목록
+- 등록된 영수증 내림차순 목록 API 호출
+- 영수증 수정, 삭제 API 호출
+#### 정산하기
+- 연도와 월은 현재 시각 기준 자동 선택
+- 연도와 월을 선택시 해당하는 영수증들의 합계, 총 건수, 정산금액 조회 API 호출
+#### 영수증 등록
+- 날짜, 금액, 사용 내역 입력받아 등록 API 호출
+#### 영수증 수정
+- 해당 영수증의 내용을 날짜, 금액, 사용 내역에 맞게 렌더링
+- 수정하면 수정된 내용 업데이트 API 호출
+#### 영수증 삭제
+- 해당 영수증을 삭제 API 호출
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### ⚙️ Environment Setup
+```
+# Install Packages
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Run Frontend Server
+npm start
+```
