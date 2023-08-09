@@ -10,7 +10,7 @@
 ### ⚙️ 개발 환경
 - `Javascript`, `Typescript`
 - **IDE** : IntelliJ
-- **Framework** : React(2.x)
+- **Framework** : React(18.x)
 - **Database** : MariaDB
 
 ## 📌 주요 기능
